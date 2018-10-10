@@ -8,7 +8,7 @@ imports:
 run:
     opengl3_example:
         cwd: imgui/examples/
-    opengl_example:
+    opengl2_example:
         cwd: imgui/examples/
     directx11_example:
         cwd: imgui/examples/
