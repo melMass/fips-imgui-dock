@@ -21,18 +21,21 @@ fips_begin_lib(imgui)
         imgui_demo.cpp
         imgui_draw.cpp
         imgui_internal.h
-        stb_rect_pack.h
-        stb_textedit.h
-        stb_truetype.h
+        imgui_widgets.cpp
+        imstb_rectpack.h
+        imstb_textedit.h
+        imstb_truetype.h
     )
 fips_end_lib()
 
 if (NOT FIPS_IMPORT)
     if (FIPS_MACOS OR FIPS_LINUX OR FIPS_WINDOWS)
         fips_begin_app(opengl2_example cmdline)
-            include_directories(imgui/examples/opengl2_example)
-            fips_dir(imgui/examples/opengl2_example)
-            fips_files(main.cpp imgui_impl_glfw.h imgui_impl_glfw.cpp)
+            include_directories(imgui/examples)
+            fips_dir(imgui/examples)
+            fips_files(imgui_impl_glfw.h imgui_impl_glfw.cpp imgui_impl_opengl2.h imgui_impl_opengl2.cpp)
+            fips_dir(imgui/examples/example_glfw_opengl2)
+            fips_files(main.cpp)
             fips_deps(imgui glfw3)
 
             if (FIPS_WINDOWS)
@@ -50,12 +53,14 @@ if (NOT FIPS_IMPORT)
         fips_end_app()
 
         fips_begin_app(opengl3_example cmdline)
+            include_directories(imgui/examples)
             include_directories(imgui/examples/libs/gl3w)
-            include_directories(imgui/examples/opengl3_example)
+            fips_dir(imgui/examples)
+            fips_files(imgui_impl_glfw.h imgui_impl_glfw.cpp imgui_impl_opengl3.h imgui_impl_opengl3.cpp)
+            fips_dir(imgui/examples/example_glfw_opengl3)
+            fips_files(main.cpp)
             fips_dir(imgui/examples/libs/gl3w/GL)
             fips_files(gl3w.c gl3w.h glcorearb.h)
-            fips_dir(imgui/examples/opengl3_example)
-            fips_files(main.cpp imgui_impl_glfw_gl3.h imgui_impl_glfw_gl3.cpp)
             fips_deps(imgui glfw3)
 
             if (FIPS_WINDOWS)
@@ -75,26 +80,32 @@ if (NOT FIPS_IMPORT)
 
     if (FIPS_WINDOWS)
         fips_begin_app(directx9_example cmdline)
-            include_directories(imgui/examples/directx9_example "$ENV{DXSDK_DIR}Include")
-            fips_dir(imgui/examples/directx9_example)
-            fips_files(main.cpp imgui_impl_dx9.h imgui_impl_dx9.cpp)
+            include_directories(imgui/examples "$ENV{DXSDK_DIR}Include")
+            fips_dir(imgui/examples)
+            fips_files(imgui_impl_dx9.h imgui_impl_dx9.cpp imgui_impl_win32.h imgui_impl_win32.cpp)
+            fips_dir(imgui/examples/example_win32_directx9)
+            fips_files(main.cpp)
             fips_deps(imgui)
-            fips_libs(d3d9 d3dx9d dxerr dxguid)
+            fips_libs(d3d9)
         fips_end_app()
 
         fips_begin_app(directx10_example cmdline)
-            include_directories(imgui/examples/directx10_example "$ENV{DXSDK_DIR}Include")
-            fips_dir(imgui/examples/directx10_example)
-            fips_files(main.cpp imgui_impl_dx10.h imgui_impl_dx10.cpp)
+            include_directories(imgui/examples "$ENV{DXSDK_DIR}Include")
+            fips_dir(imgui/examples)
+            fips_files(imgui_impl_dx10.h imgui_impl_dx10.cpp imgui_impl_win32.h imgui_impl_win32.cpp)
+            fips_dir(imgui/examples/example_win32_directx10)
+            fips_files(main.cpp)
             fips_deps(imgui)
             fips_libs(d3d10 d3dcompiler dxgi imm32)
         fips_end_app()
 
         fips_begin_app(directx11_example cmdline)
             add_definitions(-DUNICODE -D_UNICODE)
-            include_directories(imgui/examples/directx11_example)
-            fips_dir(imgui/examples/directx11_example)
-            fips_files(main.cpp imgui_impl_dx11.h imgui_impl_dx11.cpp)
+            include_directories(imgui/examples)
+            fips_dir(imgui/examples)
+            fips_files(imgui_impl_dx11.h imgui_impl_dx11.cpp imgui_impl_win32.h imgui_impl_win32.cpp)
+            fips_dir(imgui/examples/example_win32_directx11)
+            fips_files(main.cpp)
             fips_deps(imgui)
             fips_libs(d3d11 d3dcompiler dxgi imm32)
         fips_end_app()
