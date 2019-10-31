@@ -5,13 +5,21 @@ fipsified imgui (https://github.com/ocornut/imgui)
 
 fips build system: https://github.com/floooh/fips
 
-### Building
+## How to integrate:
 
-```
-> cd fips
-> ./fips clone fips-imgui
-> cd ../fips-imgui
-> ./fips build
-> ./fips run opengl3_example
+Add the dependency to your fips.yml file:
+
+```yaml
+imports:
+    fips-imgui:
+        git: https://github.com/fips-libs/fips-imgui
 ```
 
+Use imgui as dependency in your targets:
+
+```cmake
+fips_begin_*(...)
+    ...
+    fips_deps(imgui)
+fips_end_*(...)
+```
