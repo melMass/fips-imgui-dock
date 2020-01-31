@@ -25,7 +25,10 @@ fips_begin_lib(imgui)
         imstb_rectpack.h
         imstb_textedit.h
         imstb_truetype.h
+        misc/freetype/imgui_freetype.cpp
+        misc/freetype/imgui_freetype.h
     )
+    
 fips_end_lib()
 
 if (FIPS_CLANG)
