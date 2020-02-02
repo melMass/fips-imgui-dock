@@ -9,10 +9,10 @@ if (NOT FIPS_IMPORT)
     fips_setup()
     fips_project(fips-imgui)
 endif()
-
+find_package(Freetype REQUIRED)
 fips_begin_lib(imgui)
     fips_vs_disable_warnings(4312)   # 'type cast': conversion from 'int' to 'void *' of greater size
-    include_directories(imgui)
+    fips_include_directories(${FREETYPE_INCLUDE_DIRS})
     fips_dir(imgui)
     fips_files(
         imconfig.h
@@ -28,6 +28,7 @@ fips_begin_lib(imgui)
         misc/freetype/imgui_freetype.cpp
         misc/freetype/imgui_freetype.h
     )
+    fips_frameworks_osx(Freetype)
     
 fips_end_lib()
 
